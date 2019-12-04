@@ -7,13 +7,76 @@ article {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: lightgray;
 }
-#nav-bar {
+#navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 22%;
+  min-width: 280px;
+  padding: 20px;
+  border-right: 2px solid gray;
+  max-height: 100vh;
+  overflow: auto;
 }
+
+#navbar ul {
+  border-top: 2px solid gray;
+  list-style-type: none;
+}
+#navbar a {
+  text-decoration: none;
+  display: inline-block;
+  width: 100%;
+  line-height: 3.3vh;
+  border-bottom: 1px solid white;
+  color: gray;
+}
+#navbar a:hover {
+  background-color: white;
+  color: black;
+}
+header {
+  padding: 50px 0 20px 0;
+  font-size: 160%;
+  font-weight: bold;
+}
+pre {
+  background-color: gray;
+  color: white;
+  display: inline-block;
+  padding: 0 40px 0 40px;
+  margin: 15px 0;
+  font-size: 110%;
+}
+
 #main-doc {
   margin-left: 25%;
+}
+#main-doc p,
+#main-doc li {
+  line-height: 180%;
+}
+
+@media (max-width: 1140px) {
+  #main-doc {
+    margin-left: 290px;
+  }
+  pre {
+    max-width: 100%;
+    overflow: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  #navbar {
+    position: relative;
+    width: 100%;
+    border: none;
+  }
+  #main-doc {
+    margin-left: 0;
+    padding: 20px;
+  }
 }
