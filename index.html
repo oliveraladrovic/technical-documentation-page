@@ -7,5 +7,581 @@
     <link rel="stylesheet" href="style.css" />
     <title>Technical Documentation Page</title>
   </head>
-  <body></body>
+  <body>
+    <article>
+      <nav id="nav-bar">
+          <h1>Google Maps API</h1>
+          <ul>
+              <li><a href="#Basic_Google_Map" class="nav-link">Basic Google Map</a></li>
+              <li><a href="#Map_Container_and_Size" class="nav-link">Map Container and Size</a></li>
+              <li><a href="#Setting_The_Map_Properties" class="nav-link">Setting The Map Properties</a></li>
+              <li><a href="#Google:API:Key" class="nav-link">Google API Key</a></li>
+              <li><a href="#Overlays" class="nav-link">Overlays</a></li>
+              <li><a href="#Adding_a_Marker" class="nav-link">Adding a Marker</a></li>
+              <li><a href="#Animate_the_Marker" class="nav-link">Animate the Marker</a></li>
+              <li><a href="#Icon_Instead_of_Marker" class="nav-link">Icon Instead of Marker</a></li>
+              <li><a href="#Polyline" class="nav-link">Polyline</a></li>
+              <li><a href="#Polygon" class="nav-link">Polygon</a></li>
+              <li><a href="#Circle" class="nav-link">Circle</a></li>
+              <li><a href="#InfoWindow" class="nav-link">InfoWindow</a></li>
+              <li><a href="#Click_The_Marker_to_Zoom" class="nav-link">Click The Marker to Zoom</a></li>
+              <li><a href="#Pan_Back_to_Marker" class="nav-link">Pan Back to Marker</a></li>
+              <li><a href="#Open_InfoWindow_When_Clicking_on_The_Marker" class="nav-link">Open InfoWindow When Clicking on The Marker</a></li>
+              <li><a href="#Set_Markers_and_Open_InfoWindow_for_Each_Marker" class="nav-link">Set Markers and Open InfoWindow for Each Marker</a></li>
+              <li><a href="#The_Default_Controls" class="nav-link">The Default Controls</a></li>
+              <li><a href="#More_Controls" class="nav-link">More Controls</a></li>
+              <li><a href="#Disabling_The_Default_Controls" class="nav-link">Disabling The Default Controls</a></li>
+              <li><a href="#Turn_On_All_Controls" class="nav-link">Turn On All Controls</a></li>
+              <li><a href="#Modifying_Controls" class="nav-link">Modifying Controls</a></li>
+              <li><a href="#Basic_Map_Types" class="nav-link">Basic Map Types</a></li>
+              <li><a href="#Perspective_View" class="nav-link">Perspective View</a></li>
+              <li><a href="#Credit" class="nav-link">Credit</a></li>
+          </ul>
+      </nav>
+      <main id="main-doc">
+        <section class="main-section" id="Basic_Google_Map">
+          <h2>Basic Google Map</h2>
+          <p>This example creates a Google Map centered in London, England:</p>
+          <pre>
+            <code>
+&lt;!DOCTYPE html>
+&lt;html>
+&lt;body>
+
+    &lt;div id="googleMap" style="width:100%; height:400px;">&lt;/div>
+
+    &lt;script>
+        function myMap() {
+            var mapProp = {
+                center: new google.maps.LatLng(51.508742, -0.120850),
+                zoom: 5,
+            };
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+        }
+    &lt;/script>
+
+    &lt;script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap">&lt;/script>
+
+&lt;/body>
+&lt;/html>
+            </code>
+        </pre>
+        </section>
+        <section class="main-section" id="Map_Container_and_Size">
+          <h2>Map Container and Size</h2>
+          <p>The map needs an HTML element to hold the map:</p>
+          <pre>
+              <code>
+&lt;div id="googleMap" style="width:100%; height:400px;">&lt;/div>
+              </code>
+          </pre>
+          <p>Also sets the size of the map.</p>
+        </section>
+        <section class="main-section" id="Setting_The_Map_Properties">
+          <h2>Setting The Map Properties</h2>
+          <pre>
+              <code>
+function myMap() {
+    var mapProp = {
+        center: new google.maps.LatLng(51.508742, -0.120850),
+        zoom: 5,
+    };
+var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+}
+              </code>
+          </pre>
+          <p>
+            The <strong>mapProp</strong> variable defines the properties for the
+            map.
+          </p>
+          <p>
+            The <strong>center</strong> property specifies where to center the
+            map (using latitude and longitude coordinates).
+          </p>
+          <p>
+            The <strong>zoom</strong> property specifies the zoom level for the
+            map (try to experiment with the zoom level).
+          </p>
+          <p>
+            The line:
+            <strong
+              >var map=new google.maps.Map(document.getElementById("googleMap"),
+              mapProp);</strong
+            >
+            creates a new map inside the &lt;div> element with id="googleMap",
+            using the parameters that are passed (mapProp).
+          </p>
+        </section>
+        <section class="main-section" id="Google_API_Key">
+          <h2>Google API Key</h2>
+          <p>
+            Google allows a website to call any Google API for free, thousands
+            of times a day.
+          </p>
+          <p>
+            Go to
+            <a
+              href="https://developers.google.com/maps/documentation/javascript/get-api-key"
+              >https://developers.google.com/maps/documentation/javascript/get-api-key</a
+            >
+            to learn how to get an API key.
+          </p>
+          <p>
+            Google Maps expects to find the API key in the key parameter when
+            loading an API:
+          </p>
+          <pre>
+              <code>
+&lt;script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap">&lt;/script>
+              </code>
+          </pre>
+        </section>
+        <section class="main-section" id="Overlays">
+          <h2>Overlays</h2>
+          <p>
+            Overlays are objects on the map that are bound to latitude/longitude
+            coordinates.
+          </p>
+          <p>Google Maps has several types of overlays:</p>
+          <ul>
+            <li>
+              Marker - Single locations on a map. Markers can also display
+              custom icon images
+            </li>
+            <li>Polyline - Series of straight lines on a map</li>
+            <li>
+              Polygon - Series of straight lines on a map, and the shape is
+              "closed"
+            </li>
+            <li>Circle and Rectangle</li>
+            <li>
+              Info Windows - Displays content within a popup balloon on top of a
+              map
+            </li>
+            <li>Custom overlays</li>
+          </ul>
+        </section>
+        <section class="main-section" id="Adding_a_Marker">
+          <h2>Adding a Marker</h2>
+          <p>
+            The Marker constructor creates a marker. Note that the position
+            property must be set for the marker to display.
+          </p>
+          <p>Add the marker to the map by using the setMap() method:</p>
+          <pre>
+              <code>
+var marker = new google.maps.Marker({position: myCenter});
+marker.setMap(map);
+              </code>
+          </pre>
+        </section>
+        <section class="main-section" id="Animate_the_Marker">
+          <h2>Animate the Marker</h2>
+          <p>
+            The example below shows how to animate the marker with the animation
+            property:
+          </p>
+          <pre>
+              <code>
+var marker = new google.maps.Marker({
+    position:myCenter,
+    animation:google.maps.Animation.BOUNCE
+});
+marker.setMap(map);
+              </code>
+          </pre>
+        </section>
+        <section class="main-section" id="Icon_Instead_of_Marker">
+          <h2>Icon Instead of Marker</h2>
+          <p>
+            The example below specifies an image (icon) to use instead of the
+            default marker:
+          </p>
+          <pre>
+              <code>
+var marker = new google.maps.Marker({
+    position:myCenter,
+    icon:'pinkball.png'
+});
+marker.setMap(map);
+              </code>
+          </pre>
+        </section>
+        <section class="main-section" id="Polyline">
+          <h2>Polyline</h2>
+          <p>
+            A Polyline is a line that is drawn through a series of coordinates
+            in an ordered sequence.
+          </p>
+          <p>A polyline supports the following properties:</p>
+          <ul>
+            <li>
+              path - specifies several latitude/longitude coordinates for the
+              line
+            </li>
+            <li>
+              strokeColor - specifies a hexadecimal color for the line (format:
+              "#FFFFFF")
+            </li>
+            <li>
+              strokeOpacity - specifies the opacity of the line (a value between
+              0.0 and 1.0)
+            </li>
+            <li>
+              strokeWeight - specifies the weight of the line's stroke in pixels
+            </li>
+            <li>
+              editable - defines whether the line is editable by users
+              (true/false)
+            </li>
+          </ul>
+          <pre>
+              <code>
+var myTrip = [stavanger,amsterdam,london];
+var flightPath = new google.maps.Polyline({
+    path:myTrip,
+    strokeColor:"#0000FF",
+    strokeOpacity:0.8,
+    strokeWeight:2
+});
+              </code>
+          </pre>
+        </section>
+        <section class="main-section" id="Polygon">
+          <h2>Polygon</h2>
+          <p>
+            A Polygon is similar to a Polyline in that it consists of a series
+            of coordinates in an ordered sequence. However, polygons are
+            designed to define regions within a closed loop.
+          </p>
+          <p>
+            Polygons are made of straight lines, and the shape is "closed" (all
+            the lines connect up).
+          </p>
+          <p>A polygon supports the following properties:</p>
+          <ul>
+            <li>
+              path - specifies several LatLng coordinates for the line (first
+              and last coordinate are equal)
+            </li>
+            <li>
+              strokeColor - specifies a hexadecimal color for the line (format:
+              "#FFFFFF")
+            </li>
+            <li>
+              strokeOpacity - specifies the opacity of the line (a value between
+              0.0 and 1.0)
+            </li>
+            <li>
+              strokeWeight - specifies the weight of the line's stroke in pixels
+            </li>
+            <li>
+              fillColor - specifies a hexadecimal color for the area within the
+              enclosed region (format: "#FFFFFF")
+            </li>
+            <li>
+              fillOpacity - specifies the opacity of the fill color (a value
+              between 0.0 and 1.0)
+            </li>
+            <li>
+              editable - defines whether the line is editable by users
+              (true/false)
+            </li>
+          </ul>
+          <pre>
+              <code>
+var myTrip = [stavanger,amsterdam,london,stavanger];
+var flightPath = new google.maps.Polygon({
+    path:myTrip,
+    strokeColor:"#0000FF",
+    strokeOpacity:0.8,
+    strokeWeight:2,
+    fillColor:"#0000FF",
+    fillOpacity:0.4
+});
+              </code>
+          </pre>
+        </section>
+        <section class="main-section" id="Circle">
+          <h2>Circle</h2>
+          <p>A circle supports the following properties:</p>
+          <ul>
+            <li>
+              center - specifies the google.maps.LatLng of the center of the
+              circle
+            </li>
+            <li>radius - specifies the radius of the circle, in meters</li>
+            <li>
+              strokeColor - specifies a hexadecimal color for the line around
+              the circle (format: "#FFFFFF")
+            </li>
+            <li>
+              strokeOpacity - specifies the opacity of the stroke color (a value
+              between 0.0 and 1.0)
+            </li>
+            <li>
+              strokeWeight - specifies the weight of the line's stroke in pixels
+            </li>
+            <li>
+              fillColor - specifies a hexadecimal color for the area within the
+              circle (format: "#FFFFFF")
+            </li>
+            <li>
+              fillOpacity - specifies the opacity of the fill color (a value
+              between 0.0 and 1.0)
+            </li>
+            <li>
+              editable - defines whether the circle is editable by users
+              (true/false)
+            </li>
+          </ul>
+          <pre>
+                <code>
+var myCity = new google.maps.Circle({
+    center:amsterdam,
+    radius:20000,
+    strokeColor:"#0000FF",
+    strokeOpacity:0.8,
+    strokeWeight:2,
+    fillColor:"#0000FF",
+    fillOpacity:0.4
+});
+                </code>
+            </pre>
+        </section>
+        <section class="main-section" id="InfoWindow">
+          <h2>InfoWindow</h2>
+          <p>Show an InfoWindow with some text content for a marker:</p>
+          <pre>
+                <code>
+var infowindow = new google.maps.InfoWindow({
+    content:"Hello World!"
+});
+infowindow.open(map,marker);
+                </code>
+            </pre>
+        </section>
+        <section class="main-section" id="Click_The_Marker_to_Zoom">
+            <h2>Click The Marker to Zoom</h2>
+            <p>We still use the map from the previous page: a map centered on London, England.</p>
+            <p>Now we want to zoom when a user is clicking on the marker (We attach an event handler to a marker that zooms the map when clicked).</p>
+            <p>Here is the added code:</p>
+            <pre>
+                <code>
+// Zoom to 9 when clicking on marker
+google.maps.event.addListener(marker,'click',function() {
+    map.setZoom(9);
+    map.setCenter(marker.getPosition());
+});
+                </code>
+            </pre>
+            <p>We register for event notifications using the addListener() event handler. That method takes an object, an event to listen for, and a function to call when the specified event occurs.</p>
+        </section>
+        <section class="main-section" id="Pan_Back_to_Marker">
+            <h2>Pan Back to Marker</h2>
+            <p>Here, we save the zoom changes and pan the map back after 3 seconds:</p>
+            <pre>
+                <code>
+google.maps.event.addListener(marker,'click',function() {
+    var pos = map.getZoom();
+    map.setZoom(9);
+    map.setCenter(marker.getPosition());
+    window.setTimeout(function() {map.setZoom(pos);},3000);
+});
+                </code>
+            </pre>
+        </section>
+        <section class="main-section" id="Open_InfoWindow_When_Clicking_on_The_Marker">
+            <h2>Open InfoWindow When Clicking on The Marker</h2>
+            <p>Click on the marker to show an infowindow with some text:</p>
+            <pre>
+                <code>
+var infowindow = new google.maps.InfoWindow({
+    content:"Hello World!"
+});
+google.maps.event.addListener(marker, 'click', function() {
+infowindow.open(map,marker);
+});
+                </code>
+            </pre>
+        </section>
+        <section class="main-section" id="Set_Markers_and_Open_InfoWindow_for_Each_Marker">
+            <h2>Set Markers and Open InfoWindow for Each Marker</h2>
+            <p>Run a function when the user clicks on the map.</p>
+            <p>The placeMarker() function places a marker where the user has clicked, and shows an infowindow with the latitudes and longitudes of the marker:</p>
+            <pre>
+                <code>
+google.maps.event.addListener(map, 'click', function(event) {
+    placeMarker(map, event.latLng);
+});
+function placeMarker(map, location) {
+    var marker = new google.maps.Marker({
+        position: location,
+        map: map
+    });
+    var infowindow = new google.maps.InfoWindow({
+        content: 'Latitude: ' + location.lat() +
+        '<br>Longitude: ' + location.lng()
+    });
+    infowindow.open(map,marker);
+}
+                </code>
+            </pre>
+        </section>
+        <section class="main-section" id="The_Default_Controls">
+            <h2>The Default Controls</h2>
+            <p>When showing a standard Google map, it comes with the default control set:</p>
+            <ul>
+                <li>Zoom - displays a slider or "+/-" buttons to control the zoom level of the map</li>
+                <li>Pan - displays a pan control for panning the map</li>
+                <li>MapType - lets the user toggle between map types (roadmap and satellite)</li>
+                <li>Street View - displays a Pegman icon which can be dragged to the map to enable Street View</li>
+            </ul>
+        </section>
+        <section class="main-section" id="More_Controls">
+            <h2>More Controls</h2>
+            <p>In addition to the default controls, Google Maps also has:</p>
+            <ul>
+                <li>Scale - displays a map scale element</li>
+                <li>Rotate - displays a small circular icon which allows you to rotate maps</li>
+                <li>Overview Map - displays a thumbnail overview map reflecting the current map viewport within a wider area</li>
+            </ul>
+            <p>You can specify which controls to show when creating the map (inside MapOptions) or by calling setOptions() to change the map's options.</p>
+        </section>
+        <section class="main-section" id="Disabling_The_Default_Controls">
+            <h2>Disabling The Default Controls</h2>
+            <p>You may instead wish to turn off the default controls.</p>
+            <p>To do so, set the Map's disableDefaultUI property (within the Map options object) to true:</p>
+            <pre>
+                <code>
+var mapOptions {disableDefaultUI: true}
+                </code>
+            </pre>
+        </section>
+        <section class="main-section" id="Turn_On_All_Controls">
+            <h2>Turn On All Controls</h2>
+            <p>Some controls appear on the map by default; while others will not appear unless you set them.</p>
+            <p>Adding or removing controls from the map is specified in the Map options object.</p>
+            <p>Set the control to true to make it visible - Set the control to false to hide it.</p>
+            <p>The following example turns "on" all controls:</p>
+            <pre>
+                <code>
+var mapOptions {
+    panControl: true,
+    zoomControl: true,
+    mapTypeControl: true,
+    scaleControl: true,
+    streetViewControl: true,
+    overviewMapControl: true,
+    rotateControl: true
+}
+                </code>
+            </pre>
+        </section>
+        <section class="main-section" id="Modifying_Controls">
+            <h2>Modifying Controls</h2>
+            <p>Several of the map controls are configurable.</p>
+            <p>The controls can be modified by specifying control options fields.</p>
+            <p>For example, options for modifying a Zoom control are specified in the zoomControlOptions field. The zoomControlOptions field may contain:</p>
+            <ul>
+                <li>google.maps.ZoomControlStyle.SMALL - displays a mini-zoom control (only + and - buttons)</li>
+                <li>google.maps.ZoomControlStyle.LARGE - displays the standard zoom slider control</li>
+                <li>google.maps.ZoomControlStyle.DEFAULT - picks the best zoom control based on device and map size</li>
+            </ul>
+            <pre>
+                <code>
+zoomControl: true,
+zoomControlOptions: {
+    style: google.maps.ZoomControlStyle.SMALL
+}
+                </code>
+            </pre>
+            <p><strong>Note:</strong> If you modify a control, always enable the control first (set it to true).</p>
+            <p>Another configurable control is the MapType control.</p>
+            <p>Options for modifying a control are specified in the mapTypeControlOptions field. The mapTypeControlOptions field may contain:</p>
+            <ul>
+                <li>google.maps.MapTypeControlStyle.HORIZONTAL_BAR - display one button for each map type</li>
+                <li>google.maps.MapTypeControlStyle.DROPDOWN_MENU - select map type via a dropdown menu</li>
+                <li>google.maps.MapTypeControlStyle.DEFAULT - displays the "default" behavior (depends on screen size)</li>
+            </ul>
+            <pre>
+                <code>
+mapTypeControl: true,
+mapTypeControlOptions: {
+    style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+}
+                </code>
+            </pre>
+            <p>You can also position a control, with the ControlPosition property:</p>
+            <pre>
+                <code>
+mapTypeControl: true,
+mapTypeControlOptions: {
+    style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+    position: google.maps.ControlPosition.TOP_CENTER
+}
+                </code>
+            </pre>
+        </section>
+        <section class="main-section" id="Basic_Map_Types">
+            <h2>Basic Map Types</h2>
+            <p>The following map types are supported in Google Maps API:</p>
+            <ul>
+                <li>ROADMAP (normal, default 2D map)</li>
+                <li>SATELLITE (photographic map)</li>
+                <li>HYBRID (photographic map + roads and city names)</li>
+                <li>TERRAIN (map with mountains, rivers, etc.)</li>
+            </ul>
+            <p>The map type is specified either within the Map properties object, with the mapTypeId property:</p>
+            <pre>
+                <code>
+var mapOptions = {
+    center:new google.maps.LatLng(51.508742,-0.120850),
+    zoom:7,
+    mapTypeId: google.maps.MapTypeId.HYBRID
+};
+                </code>
+            </pre>
+            <p>Or by calling the map's setMapTypeId() method:</p>
+            <pre>
+                <code>
+map.setMapTypeId(google.maps.MapTypeId.HYBRID);
+                </code>
+            </pre>
+        </section>
+        <section class="main-section" id="Perspective_View">
+            <h2>Perspective View</h2>
+            <p>The map types SATELLITE and HYBRID support a 45° perspective imagery view for certain locations (only at high zoom levels).</p>
+            <p>If you zoom into a location with 45° imagery view, the map will automatically alter the perspective view. In addition, the map will add:</p>
+            <ul>
+                <li>A compass wheel around the Pan control, allowing you to rotate the image</li>
+                <li>A Rotate control between the Pan and Zoom controls, allowing you to rotate the image 90°</li>
+                <li>A toggle control for displaying the 45° perspective view, under the Satellite control/label</li>
+            </ul>
+            <p><strong>Note:</strong> Zooming out from a map with 45° imagery will revert each of these changes, and the original map is displayed.</p>
+            <p>The following example shows a 45° perspective view of Palazzo Ducale in Venice, Italy:</p>
+            <pre>
+                <code>
+var mapOptions = {
+    center:myCenter,
+    zoom:18,
+    mapTypeId:google.maps.MapTypeId.HYBRID
+};
+                </code>
+            </pre>
+            <p>You can disable 45° perspective view by calling setTilt(0) on the Map object:</p>
+            <pre>
+                <code>
+map.setTilt(0);
+                </code>
+            </pre>
+            <p><strong>Tip:</strong> To enable 45° perspective view at a later point, call setTilt(45).</p>
+        </section>
+        <section class="main-section" id="Credit">
+            <h2>Credit</h2>
+            <p><strong>All the text and examples are copied from <a href="https://www.w3schools.com/graphics/google_maps_intro.asp">W3Scools.com</a>!</strong></p>
+        </section>
+      </main>
+    </article>
+  </body>
 </html>
